@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 
-def f(img_path):
+def find_coins_1_2_5(img_path):
     Dp = 116
     Dd = 132
     Dq = 142
@@ -23,10 +23,6 @@ def f(img_path):
 
     mask5 = np.zeros((Dq, Dq), dtype=np.uint8)
     cv2.circle(mask5, (int(Dq / 2), int(Dq / 2)), int(Dq / 2), 255, -1)
-
-    kernel_p = np.ones((int(Dp / 2), int(Dp / 2)), np.uint8)
-    kernel_d = np.ones((int(Dd / 2), int(Dd / 2)), np.uint8)
-    kernel_q = np.ones((int(Dq / 2), int(Dq / 2)), np.uint8)
 
     Q = cv2.erode(B, mask2, iterations=1)
     Q = cv2.dilate(Q, mask2, iterations=1)
@@ -51,5 +47,9 @@ def f(img_path):
     plt.show()
 
 
-img_path = 'C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\coins.jpg'
-f(img_path)
+def recognize_shapes(img_path):
+    pass
+
+
+# img_path = 'C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\coins.jpg'
+# find_coins_1_2_5(img_path)

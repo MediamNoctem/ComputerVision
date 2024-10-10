@@ -1,35 +1,54 @@
 import cv2
 import numpy as np
+from matplotlib import pyplot as plt
 
-# Read image.
-img = cv2.imread('C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\coins.jpg', cv2.IMREAD_COLOR)
 
-# Convert to grayscale.
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+def recognize_triangle(image_path):
+    """
+    Распознает треугольник на изображении с помощью морфологических операций
+    без нахождения контуров и аппроксимации.
 
-# Blur using 3 * 3 kernel.
-gray_blurred = cv2.blur(gray, (3, 3))
+    Args:
+        image_path: Путь к изображению.
 
-# Apply Hough transform on the blurred image.
-detected_circles = cv2.HoughCircles(gray_blurred,
-                                    cv2.HOUGH_GRADIENT, 1, 20, param1=50,
-                                    param2=30, minRadius=1, maxRadius=900)
+    Returns:
+        True, если треугольник найден, иначе False.
+    """
 
-# Draw circles that are detected.
-if detected_circles is not None:
+    # Загрузка изображения
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 
-    # Convert the circle parameters a, b and r to integers.
-    detected_circles = np.uint16(np.around(detected_circles))
+    # Бинаризация изображения
+    ret, thresh = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY_INV)
 
-    for pt in detected_circles[0, :]:
-        a, b, r = pt[0], pt[1], pt[2]
+    # Создание структурного элемента для эрозии и дилатации
+    kernel = np.ones((5, 5), np.uint8)
 
-        # Draw the circumference of the circle.
-        cv2.circle(img, (a, b), r, (0, 255, 0), 2)
+    # Морфологическое открытие для удаления шума
+    opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
-        print(str(r * 2))
+    # Морфологическое закрытие для заполнения пробелов
+    closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel, iterations=2)
 
-        # Draw a small circle (of radius 1) to show the center.
-        cv2.circle(img, (a, b), 1, (0, 0, 255), 3)
-        cv2.imshow("Detected Circle", img)
-        cv2.waitKey(0)
+    print(closing.shape[0])
+
+    # Поиск пикселей с тремя соседними пикселями (углы треугольника)
+    triangle_pixels = 0
+    for i in range(closing.shape[0] - 2):
+        for j in range(closing.shape[1] - 2):
+            if 
+                triangle_pixels += 1
+    print(triangle_pixels)
+
+    # Проверка на наличие треугольников
+    # return len(triangle_pixels[0]) > 0
+    return
+
+
+# Пример использования
+image_path = "C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\figures.png"
+
+if recognize_triangle(image_path):
+    print("Треугольник найден!")
+else:
+    print("Треугольник не найден.")
