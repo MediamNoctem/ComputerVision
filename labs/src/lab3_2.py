@@ -120,5 +120,5 @@ def recognize_figures(image_path):
             return 'Эллипс'
 
 
-image_path = "C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\figures\\triangle.png"
+image_path = "C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\figures\\ellipse.png"
 print(recognize_figures(image_path))
