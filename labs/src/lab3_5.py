@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import random
+from matplotlib import pyplot as plt
 
 
 def find_sides_rectangle(perimeter):
@@ -34,6 +35,5 @@ perimeter = int(input("Введите желаемый периметр: "))
 
 image = generate_random_shape(perimeter)
 
-cv2.imshow("Случайная фигура без отверстий", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.imshow(image, 'gray')
+plt.show()
