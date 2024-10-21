@@ -47,9 +47,5 @@ def find_coins_1_2_5(img_path):
     plt.show()
 
 
-def recognize_shapes(img_path):
-    pass
-
-
-# img_path = 'C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\coins.jpg'
-# find_coins_1_2_5(img_path)
+img_path = 'C:\\Users\\romAn\\Documents\\GitHub\\ComputerVision\\labs\\img\\coins.jpg'
+find_coins_1_2_5(img_path)
